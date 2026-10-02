@@ -1,0 +1,33 @@
+{
+  "name": "selfeval-desktop",
+  "productName": "SelfEvaluation",
+  "version": "1.0.0",
+  "description": "دليل التقويم الذاتي المدرسي — يعمل دون إنترنت على ويندوز وماك",
+  "main": "main.js",
+  "author": "School Self Evaluation",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "standalone": "node scripts/make-standalone.mjs",
+    "dist:win": "electron-builder --win --x64 --publish never",
+    "dist:mac": "electron-builder --mac --universal --publish never"
+  },
+  "devDependencies": {
+    "electron": "^44.0.0",
+    "electron-builder": "^26.0.0"
+  },
+  "build": {
+    "appId": "sa.edu.selfevaluation",
+    "productName": "SelfEvaluation",
+    "files": ["main.js", "preload.js", "renderer/**/*"],
+    "directories": { "buildResources": "build", "output": "dist" },
+    "win": { "target": [{ "target": "nsis", "arch": ["x64"] }], "icon": "build/icon.png" },
+    "nsis": { "oneClick": true, "perMachine": false, "createDesktopShortcut": true, "createStartMenuShortcut": true, "shortcutName": "التقويم الذاتي" },
+    "mac": {
+      "target": [{ "target": "dmg", "arch": ["universal"] }],
+      "icon": "build/icon.png",
+      "category": "public.app-category.education",
+      "extendInfo": { "CFBundleDisplayName": "التقويم الذاتي", "CFBundleName": "التقويم الذاتي" }
+    }
+  }
+}
